@@ -1,15 +1,19 @@
 [CmdletBinding()]
  
 Param (
-    [Parameter(Mandatory = $true)][string[]]$filePaths,
-    [Parameter(Mandatory = $true)][String[]]$replaceStrings,
-    [Parameter(Mandatory = $true)][String[]]$findStrings
+    [Parameter(Mandatory = $true)][string]$filePaths,
+    [Parameter(Mandatory = $true)][String]$replaceStrings,
+    [Parameter(Mandatory = $true)][String]$findStrings
 )
 
-for ($i=0; $i -lt $filePaths.Length; $i++) {
-    $filePath = $filePaths[$i]
-    $replaceString = $replaceStrings[$i]
-    $findString = $findStrings[$i]
+$filePathsArray = $filePaths -split ';'
+$replaceStringsArray = $replaceStrings -split ';'
+$findStringsArray = $findStrings -split ';'
+
+for ($i=0; $i -lt $filePathsArray.Length; $i++) {
+    $filePath = $filePathsArray[$i]
+    $replaceString = $replaceStringsArray[$i]
+    $findString = $findStringsArray[$i]
 
     Write-Output "Replacing string $findString with $replaceString in file $filePath"
 
