@@ -6,9 +6,9 @@ Param (
     [Parameter(Mandatory = $true)][String]$findStrings
 )
 
-$filePathsArray = $filePaths -split ';'
-$replaceStringsArray = $replaceStrings -split ';'
-$findStringsArray = $findStrings -split ';'
+$filePathsArray = $filePaths -split ','
+$replaceStringsArray = $replaceStrings -split ','
+$findStringsArray = $findStrings -split ','
 
 for ($i=0; $i -lt $filePathsArray.Length; $i++) {
     $filePath = $filePathsArray[$i]
