@@ -3,7 +3,8 @@
 Param (
     [Parameter(Mandatory = $true)][string]$filePaths,
     [Parameter(Mandatory = $true)][String]$replaceStrings,
-    [Parameter(Mandatory = $true)][String]$findStrings
+    [Parameter(Mandatory = $true)][String]$findStrings,
+    [Parameter(Mandatory = $true)][bool]$deleteAnalyticsFolder
 )
 
 $filePathsArray = $filePaths -split ','
@@ -32,5 +33,11 @@ for ($i=0; $i -lt $filePathsArray.Length; $i++) {
         Write-Output "The old string is still found in the file."
     } else {
         Write-Output "The string has been replaced successfully!"
+    }
+}
+
+if($deleteAnalyticsFolder){
+    if(Test-Path -Path "C:\Program Files\Zvoove\Analytics"){
+        Remove-Item -Path $path -Recurse -Force
     }
 }
