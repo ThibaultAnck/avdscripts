@@ -39,6 +39,6 @@ for ($i=0; $i -lt $filePathsArray.Length; $i++) {
 
 if($deleteAnalyticsFolder -eq 'True'){
     if(Test-Path -Path "C:\Program Files\Zvoove\Analytics"){
-        Remove-Item -Path $path -Recurse -Force
+        Remove-Item -Path "C:\Program Files\Zvoove\Analytics" -Recurse -Force
     }
 }
