@@ -4,7 +4,8 @@ Param (
     [Parameter(Mandatory = $true)][string]$filePaths,
     [Parameter(Mandatory = $true)][String]$replaceStrings,
     [Parameter(Mandatory = $true)][String]$findStrings,
-    [Parameter(Mandatory = $true)][bool]$deleteAnalyticsFolder
+    [ValidateSet('True', 'False')]
+    [Parameter(Mandatory = $true)][String]$deleteAnalyticsFolder
 )
 
 $filePathsArray = $filePaths -split ','
@@ -36,7 +37,7 @@ for ($i=0; $i -lt $filePathsArray.Length; $i++) {
     }
 }
 
-if($deleteAnalyticsFolder){
+if($deleteAnalyticsFolder -eq 'True'){
     if(Test-Path -Path "C:\Program Files\Zvoove\Analytics"){
         Remove-Item -Path $path -Recurse -Force
     }
