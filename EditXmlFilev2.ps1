@@ -49,18 +49,18 @@ if($deleteAnalyticsFolder -eq 'True'){
 if($renameZvooveShortcuts -eq 'True'){
     if(Test-Path 'C:\Users\Public\Desktop\AERO_zvoove_test.lnk'){
         if ($environment -eq 'prd') {
-            Rename-Item -Path 'C:\Users\Public\Desktop\AERO_zvoove_test.lnk' -NewName 'AERO_zvoove_production.lnk'
+            Rename-Item -Path 'C:\Users\Public\Desktop\AERO_zvoove_test.lnk' -NewName 'AERO_zvoove_prd.lnk'
         }
         if ($environment -eq 'stg') {
-            Rename-Item -Path 'C:\Users\Public\Desktop\AERO_zvoove_test.lnk' -NewName 'AERO_zvoove_staging.lnk'
+            Rename-Item -Path 'C:\Users\Public\Desktop\AERO_zvoove_test.lnk' -NewName 'AERO_zvoove_Schulungsumgebung.lnk'
         } 
     }
     if(Test-Path 'C:\Users\Public\Desktop\TPPM_zvoove_test.lnk'){
         if ($environment -eq 'prd') {
-            Rename-Item -Path 'C:\Users\Public\Desktop\TPPM_zvoove_test.lnk' -NewName 'TPPM_zvoove_production.lnk'
+            Rename-Item -Path 'C:\Users\Public\Desktop\TPPM_zvoove_test.lnk' -NewName 'TPPM_zvoove_prd.lnk'
         }
         if ($environment -eq 'stg') {
-            Rename-Item -Path 'C:\Users\Public\Desktop\TPPM_zvoove_test.lnk' -NewName 'TPPM_zvoove_staging.lnk'
+            Rename-Item -Path 'C:\Users\Public\Desktop\TPPM_zvoove_test.lnk' -NewName 'TPPM_zvoove_Schulungsumgebung.lnk'
         } 
     }
     
