@@ -5,7 +5,10 @@ Param (
     [Parameter(Mandatory = $true)][String]$replaceStrings,
     [Parameter(Mandatory = $true)][String]$findStrings,
     [ValidateSet('True', 'False')]
-    [Parameter(Mandatory = $true)][String]$deleteAnalyticsFolder
+    [Parameter(Mandatory = $true)][String]$deleteAnalyticsFolder,
+    [ValidateSet('True', 'False')]
+    [Parameter(Mandatory = $true)][String]$renameZvooveShortcuts,
+    [Parameter(Mandatory = $true)][String]$environment
 )
 
 $filePathsArray = $filePaths -split ','
@@ -41,4 +44,24 @@ if($deleteAnalyticsFolder -eq 'True'){
     if(Test-Path -Path "C:\Program Files\Zvoove\Analytics"){
         Remove-Item -Path "C:\Program Files\Zvoove\Analytics" -Recurse -Force
     }
+}
+
+if($renameZvooveShortcuts -eq 'True'){
+    if(Test-Path 'C:\Users\Public\Desktop\AERO_zvoove_test.lnk'){
+        if ($environment -eq 'prd') {
+            Rename-Item -Path 'C:\Users\Public\Desktop\AERO_zvoove_test.lnk' -NewName 'AERO_zvoove_production.lnk'
+        }
+        if ($environment -eq 'stg') {
+            Rename-Item -Path 'C:\Users\Public\Desktop\AERO_zvoove_test.lnk' -NewName 'AERO_zvoove_staging.lnk'
+        } 
+    }
+    if(Test-Path 'C:\Users\Public\Desktop\TPPM_zvoove_test.lnk'){
+        if ($environment -eq 'prd') {
+            Rename-Item -Path 'C:\Users\Public\Desktop\TPPM_zvoove_test.lnk' -NewName 'TPPM_zvoove_production.lnk'
+        }
+        if ($environment -eq 'stg') {
+            Rename-Item -Path 'C:\Users\Public\Desktop\TPPM_zvoove_test.lnk' -NewName 'TPPM_zvoove_staging.lnk'
+        } 
+    }
+    
 }
