@@ -9,7 +9,6 @@ Param (
     [ValidateSet('True', 'False')]
     [Parameter(Mandatory = $true)][String]$renameZvooveShortcuts,
     [ValidateSet('True', 'False')]
-    [Parameter(Mandatory = $true)][String]$createDmcShortcut,
     [Parameter(Mandatory = $true)][String]$environment
 )
 
@@ -66,11 +65,4 @@ if($renameZvooveShortcuts -eq 'True'){
         } 
     }
     
-}
-
-if($createDmcShortcut -eq 'True'){
-    $WshShell = New-Object -comObject WScript.Shell
-    $Shortcut = $WshShell.CreateShortcut("C:\Users\Public\Desktop\DirectMC4.lnk")
-    $Shortcut.TargetPath = "\\tpdmcprddb01.hohr.com\directMC4\PRG\MCCWIN\PRG\loader33u.exe"
-    $Shortcut.Save()    
 }
