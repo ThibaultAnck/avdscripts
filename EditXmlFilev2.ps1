@@ -8,7 +8,6 @@ Param (
     [Parameter(Mandatory = $true)][String]$deleteAnalyticsFolder,
     [ValidateSet('True', 'False')]
     [Parameter(Mandatory = $true)][String]$renameZvooveShortcuts,
-    [ValidateSet('True', 'False')]
     [Parameter(Mandatory = $true)][String]$environment
 )
 
