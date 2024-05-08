@@ -3,7 +3,6 @@
 Param (
     [Parameter(Mandatory = $true)][string]$filePaths,
     [Parameter(Mandatory = $true)][String]$replaceStrings,
-    [Parameter(Mandatory = $true)][String]$findStrings,
     [ValidateSet('True', 'False')]
     [Parameter(Mandatory = $true)][String]$deleteAnalyticsFolder,
     [ValidateSet('True', 'False')]
@@ -15,30 +14,26 @@ Param (
 
 $filePathsArray = $filePaths -split ','
 $replaceStringsArray = $replaceStrings -split ','
-$findStringsArray = $findStrings -split ','
 
 for ($i=0; $i -lt $filePathsArray.Length; $i++) {
     $filePath = $filePathsArray[$i]
     $replaceString = $replaceStringsArray[$i]
-    $findString = $findStringsArray[$i]
 
-    Write-Output "Replacing string $findString with $replaceString in file $filePath"
+    Write-Output "Replacing all content in file $filePath with $replaceString"
 
     $content = Get-Content -Path $filePath
-    $newContent = $content.Replace($findString, $replaceString)
 
     Write-Output "Old content: $content"
 
-    Write-Output "New content: $newContent"
+    Set-Content -Path $filePath -Value $replaceString
+	
+	$updatedContent = Get-Content -Path $filePath
+    Write-Output "New content: $updatedContent"
 
-    Set-Content -Path $filePath -Value $newContent
-
-    $updatedContent = Get-Content -Path $filePath
-
-    if ($updatedContent -like "*$findString*") {
-        Write-Output "The old string is still found in the file."
+    if ($updatedContent -eq $replaceString) {
+        Write-Output "The content has been replaced successfully!"
     } else {
-        Write-Output "The string has been replaced successfully!"
+        Write-Output "Failed to replace the content."
     }
 }
 
